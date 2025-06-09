@@ -135,7 +135,7 @@
       <div class="contact-header">
       <h1>Contact me </h1>
     </div>
-    <form id="contactForm" class="contact-form" action="/send" method="POST">
+    <form id="contactForm" class="contact-form">
        <input type="text" class="contact-form-text" placeholder="Name" name="name">
        <input type="email" class="contact-form-text" placeholder="Email" name="email">
        <textarea class="contact-form-text" placeholder="Your message" name="message"></textarea>
@@ -146,49 +146,48 @@
     </section>
 
     <script>
-      const form = document.getElementById('contactForm');
+      const form = document.querySelector('form'); // Matches the contact form
       const responseDiv = document.getElementById('responseMessage');
     
-      if (form) {
-        form.addEventListener('submit', async (e) => {
-          e.preventDefault(); // ✅ Prevents default page reload
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault(); // Prevent the default form submission
     
-          const formData = new FormData(form);
-          const params = new URLSearchParams();
-          for (const pair of formData) {
-            params.append(pair[0], pair[1]);
+        const formData = new FormData(form);
+        const params = new URLSearchParams();
+        for (const pair of formData) {
+          params.append(pair[0], pair[1]);
+        }
+    
+        try {
+          const response = await fetch('https://madriz-backend.onrender.com', {  // 👈 Replace with your actual Render backend URL
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+          });
+    
+          const data = await response.json();
+    
+          responseDiv.style.color = data.success ? 'green' : 'red';
+          responseDiv.textContent = data.message;
+    
+          if (data.success) {
+            form.reset();
           }
     
-          try {
-            const response = await fetch('/send', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-              body: params.toString()
-            });
+          setTimeout(() => {
+            responseDiv.textContent = '';
+          }, 5000);
     
-            const data = await response.json();
-    
-            responseDiv.style.color = data.success ? 'green' : 'red';
-            responseDiv.textContent = data.message;
-    
-            if (data.success) {
-              form.reset();
-            }
-    
-            setTimeout(() => {
-              responseDiv.textContent = '';
-            }, 5000);
-    
-          } catch (error) {
-            responseDiv.style.color = 'red';
-            responseDiv.textContent = 'Error sending message.';
-            setTimeout(() => {
-              responseDiv.textContent = '';
-            }, 5000);
-          }
-        });
-      }
+        } catch (error) {
+          responseDiv.style.color = 'red';
+          responseDiv.textContent = 'Error sending message.';
+          setTimeout(() => {
+            responseDiv.textContent = '';
+          }, 5000);
+        }
+      });
     </script>
+    
     
 
     <section class="footer">
