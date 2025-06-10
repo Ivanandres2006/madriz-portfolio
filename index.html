@@ -225,13 +225,23 @@
     </section>
 
     <script>
-      const menuToggle = document.getElementById('menu-toggle');
-      const navLinks = document.getElementById('nav-links');
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.querySelector(".menu-toggle");
+        const navLinks = document.querySelector(".nav-links");
+        const navItems = document.querySelectorAll(".nav-links li a");
     
-      menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('show');
+        // Toggle menu on hamburger click
+        menuToggle.addEventListener("click", function () {
+          navLinks.classList.toggle("show");
+        });
+    
+        // Auto-close menu when a link is clicked
+        navItems.forEach((link) => {
+          link.addEventListener("click", function () {
+            navLinks.classList.remove("show");
+          });
+        });
       });
-    </script>
-    
+    </script>    
 </body>
 </html>
