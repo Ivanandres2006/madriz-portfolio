@@ -206,7 +206,11 @@
 }
 
 .skill-icon {
-  width: 50px;
+  width: 40px;
+}
+
+.skill-icon-PostgreSQL {
+  width: 90px;
 }
 
 /* Projects Section */
@@ -514,6 +518,10 @@ img {
   }
 
   .skill-icon {
-    width: 40px;
+    width: 35px;
+  }
+
+  .skill-icon-PostgreSQL {
+    width: 90px;
   }
 }
