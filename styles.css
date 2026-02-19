@@ -1,8 +1,14 @@
+:root {
+  --primary-shadow: rgba(0, 0, 0, 0.15);
+  --bottom-margin: 1rem;
+  --accent: #2ecc71;
+}
+
 * {
   margin: 0;
-  font-family: sans-serif;
   padding: 0;
   box-sizing: border-box;
+  font-family: sans-serif;
 }
 
 /* Banner Section */
@@ -20,10 +26,6 @@
   width: 120px;
   cursor: pointer;
   color: white;
-}
-
-.logo:hover {
-  background: transparent;
 }
 
 .topNav {
@@ -55,7 +57,7 @@
 }
 
 .nav-links li::after {
-  content: '';
+  content: "";
   height: 3px;
   width: 0;
   background: #009688;
@@ -103,25 +105,24 @@
   flex-direction: column;
   padding: 20px;
   margin-bottom: 70px;
-  font-family: 'Poppins', sans-serif;
 }
 
 .header-about {
   text-align: center;
-  color: #000000;
+  color: #000;
   padding: 1rem;
   position: relative;
 }
 
 .header-about::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   height: 4px;
   width: 100px;
-  background-color: #2ecc71;
+  background-color: var(--accent);
   border-radius: 2px;
 }
 
@@ -153,14 +154,14 @@
 }
 
 .header::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   height: 4px;
   width: 100px;
-  background-color: #2ecc71;
+  background-color: var(--accent);
   border-radius: 2px;
 }
 
@@ -168,9 +169,9 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   text-align: center;
-  grid-gap: 1rem;
+  gap: 1rem;
   padding: 1rem 80px;
   font-size: 1.2rem;
 }
@@ -178,7 +179,6 @@
 .skill-box {
   padding: 1rem;
   color: #ddd;
-  cursor: pointer;
 }
 
 .skill-title {
@@ -192,7 +192,6 @@
 .img {
   width: 90px;
   height: 90px;
-  position: relative;
   border-radius: 45px;
   background-color: #fff;
   display: flex;
@@ -217,6 +216,7 @@
 #projects {
   background-color: #272727;
   padding-top: 20px;
+  padding-bottom: 30px;
 }
 
 .header-work {
@@ -227,71 +227,81 @@
 }
 
 .header-work::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   height: 4px;
   width: 100px;
-  background-color: #2ecc71;
+  background-color: var(--accent);
   border-radius: 2px;
 }
 
-.project-pic {
-  width: 120px;
+/* ✅ THIS is the big fix: match the first photo layout */
+.projects-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding: 2rem 20px;
 }
 
+/* Card matches first photo: clean, centered text */
+.project-card {
+  background-color: #fff;
+  border-radius: 18px;
+  box-shadow: 0 3px 10px var(--primary-shadow);
+  padding: 20px 18px;
+  width: 360px;            /* fixed width like first photo */
+  text-align: center;
+}
+
+/* Image box like first photo: no black banner */
+.imag {
+  height: 170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  background: transparent;
+  border-radius: 0;
+  overflow: visible;
+}
+
+/* ✅ Make image small + centered like first photo */
 .project-pic-dinosor {
   width: 170px;
+  height: auto;
+  object-fit: contain;
+  display: block;
 }
 
-.imag {
-  height: 155px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.projects-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  grid-gap: 1rem;
-  padding: 1rem 80px;
-  font-size: 1.2rem;
-}
-
-.projects-title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.project-container p {
-  padding: 0.4rem;
+/* Title + text spacing */
+.project-title {
+  font-size: 1.7rem;
+  margin: 10px 0 10px;
 }
 
 .project-details {
-  margin-bottom: var(--bottom-margin);
+  font-size: 1.2rem;
+  line-height: 1.35;
+  padding: 0 10px;
+  margin-bottom: 18px;
 }
 
-.project-card {
-  background-color: #fff;
-  border-radius: 11px;
-  box-shadow: 0 3px 10px var(--primary-shadow);
-  padding: 1rem;
-  margin: 10px;
-}
-
-.project-card a {
+/* ✅ Link style like first photo (simple text, no gray button bar) */
+.project-link {
+  display: inline-block;
   text-decoration: none;
-  color: black;
+  color: #000;
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-top: 8px;
+}
+
+.project-link:hover {
+  text-decoration: underline;
 }
 
 /* Contact Section */
@@ -308,14 +318,14 @@
 }
 
 .contact-header::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   height: 4px;
   width: 100px;
-  background-color: #2ecc71;
+  background-color: var(--accent);
   border-radius: 2px;
 }
 
@@ -329,7 +339,6 @@
 .contact-form-text {
   display: block;
   width: 100%;
-  box-sizing: border-box;
   margin: 16px 0;
   border: 0;
   padding: 20px 40px;
@@ -393,12 +402,9 @@ textarea.contact-form-text {
 }
 
 .footer ul {
-  margin-top: 0;
-  margin-bottom: 0;
   font-size: 18px;
   line-height: 1.6;
   list-style: none;
-  padding: 0;
   text-align: center;
 }
 
@@ -424,7 +430,7 @@ textarea.contact-form-text {
   color: #aaa;
 }
 
-/* Images */
+/* Global Images */
 img {
   max-width: 100%;
   height: auto;
@@ -432,22 +438,16 @@ img {
   margin: 0 auto;
 }
 
-/* Media Queries for Responsiveness */
+/* Media Queries */
 @media screen and (max-width: 990px) {
   .container {
     grid-template-columns: repeat(2, 1fr);
     padding: 2rem 50px;
   }
-
-  .projects-container {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 2rem 40px;
-  }
 }
 
 @media screen and (max-width: 650px) {
-  .container,
-  .projects-container {
+  .container {
     grid-template-columns: 1fr;
     padding: 1rem 20px;
   }
@@ -508,10 +508,6 @@ img {
     padding: 10px 0;
   }
 
-  .footer ul {
-    padding-left: 0;
-  }
-
   .img {
     width: 70px;
     height: 70px;
@@ -521,7 +517,9 @@ img {
     width: 35px;
   }
 
-  .skill-icon-PostgreSQL {
-    width: 90px;
+  /* make project cards fit on mobile */
+  .project-card {
+    width: 92%;
+    max-width: 380px;
   }
 }
